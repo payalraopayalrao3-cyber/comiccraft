@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Export Ready • ComicCraft{% endblock %}
+{% block content %}
+<section class="success card">
+    <div class="success-icon">✓</div>
+    <p class="eyebrow">EXPORT READY</p>
+    <h1>Your comic PDF is ready.</h1>
+    <p>Your five-panel comic has been compiled with its illustrations, captions and narration.</p>
+    <div class="actions center">
+        <a class="button primary" href="/export/{{ comic.comic_id }}">⬇ Download PDF</a>
+        <a class="button secondary" href="/">Go Create Another Comic</a>
+    </div>
+</section>
+{% endblock %}

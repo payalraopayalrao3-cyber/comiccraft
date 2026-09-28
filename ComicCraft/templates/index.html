@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Create Comic • ComicCraft{% endblock %}
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">CREATE YOUR STORY</p>
+    <h1>Turn an idea into a comic.</h1>
+    <p>Describe your adventure, choose the mood and art style, and ComicCraft builds a five-panel story with illustrations.</p>
+</section>
+
+{% if error %}
+<div class="alert">{{ error }}</div>
+{% endif %}
+
+<form class="card form-card" action="/generate" method="post" onsubmit="showLoading()">
+    <label>
+        Story Prompt
+        <textarea name="story_prompt" maxlength="1200" required placeholder="A brave fox exploring an enchanted forest..."></textarea>
+    </label>
+
+    <div class="grid two">
+        <label>
+            Main Character Name
+            <input name="character_name" maxlength="80" required placeholder="Luna">
+        </label>
+        <label>
+            Setting
+            <input name="setting" maxlength="120" required placeholder="Enchanted forest">
+        </label>
+    </div>
+
+    <div class="grid two">
+        <label>
+            Story Tone
+            <select name="tone">
+                <option>light-hearted</option>
+                <option>dramatic</option>
+                <option>poetic</option>
+                <option>funny</option>
+                <option>mysterious</option>
+            </select>
+        </label>
+        <label>
+            Art Style
+            <select name="art_style">
+                <option>comic book</option>
+                <option>anime</option>
+                <option>pixel art</option>
+                <option>realistic</option>
+                <option>watercolor</option>
+            </select>
+        </label>
+    </div>
+
+    <button class="button primary" type="submit" id="generate-button">✨ Generate Comic</button>
+    <p class="hint" id="loading" hidden>Generating five panels… this may take a few minutes when real AI image generation is enabled.</p>
+</form>
+
+<section class="card api-card">
+    <h2>Developer test</h2>
+    <p>FastAPI docs are available at <a href="/docs">/docs</a>. Health check: <a href="/health">/health</a>.</p>
+</section>
+
+<script>
+function showLoading() {
+    document.getElementById("generate-button").disabled = true;
+    document.getElementById("generate-button").textContent = "Generating…";
+    document.getElementById("loading").hidden = false;
+}
+</script>
+{% endblock %}
